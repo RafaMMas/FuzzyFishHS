@@ -1,0 +1,17 @@
+Package: FuzzyFishHS
+Title: Zero-order Takagi–Sugeno–Kang fuzzy rule-based systems for fish habitat evaluation
+Version: 1.0
+Authors@R: 
+    person("Muñoz-Mas", "Rafael", , "rafa.m.mas@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-7263-5799"))
+Description: FuzzyFishHS provides functions to develop and inspect zero-order presence-absence Takagi–Sugeno–Kang fuzzy rule-based systems for fish habitat evaluation within environmental flow assessemnt studies.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    caret,
+    stringr
+Depends: 
+    R (>= 2.10)
+LazyData: true
