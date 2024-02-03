@@ -3,7 +3,7 @@
 \docType{data}
 \name{Lepomis.gibbosus.dataset}
 \alias{Lepomis.gibbosus.dataset}
-\title{Lepomis gibbosus dataset}
+\title{Lepomis gibbosus dataset continaing four microhabitat variables: Velocity, Depth, Substrate and Cover and its presence (1) and absneec (0).}
 \format{
 An object of class \code{data.frame} with 1293 rows and 11 columns.
 }
@@ -11,6 +11,6 @@ An object of class \code{data.frame} with 1293 rows and 11 columns.
 Lepomis.gibbosus.dataset
 }
 \description{
-Lepomis gibbosus dataset
+Lepomis gibbosus dataset continaing four microhabitat variables: Velocity, Depth, Substrate and Cover and its presence (1) and absneec (0).
 }
 \keyword{datasets}
