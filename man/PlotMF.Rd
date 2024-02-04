@@ -7,17 +7,27 @@
 PlotMF(FRBS, n.pt = 9999, data = NULL, Title = NULL)
 }
 \arguments{
-\item{FRBS}{the list compiling the elements describing a zero-order Takagi–Sugeno–Kang fuzzy rule-based system}
+\item{FRBS}{the list compiling the elements describing a zero-order Takagi–Sugeno–Kang fuzzy rule-based system.}
 
-\item{n.pt}{number of points used to plot each membership function}
+\item{n.pt}{number of points/resolution used to plot each membership function.}
 
-\item{data}{the training datataset in data.frame format}
+\item{data}{the training datataset in \emph{data.frame} format.}
 
-\item{Title}{the figure title}
+\item{Title}{the figure title.}
 }
 \value{
 a 4 by 4 plot of the membership functions for each input variable
 }
 \description{
 Function to plot the membership functions
+}
+\examples{
+PlotMF(FRBS = Lepomis.gibbosus.FRBS, n.pt = 9999,
+data = NULL,
+Title = "Lepomis gibbosus")
+
+PlotMF(FRBS = Lepomis.gibbosus.FRBS, n.pt = 9999,
+data = Lepomis.gibbosus.dataset,
+Title = "Lepomis gibbosus")
+
 }

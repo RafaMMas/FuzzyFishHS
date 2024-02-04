@@ -17,3 +17,11 @@ membership of the evaluated values
 \description{
 Z-shaped membership function
 }
+\examples{
+plot(ZMF(pattern = seq(0, 100, by = 1), parameters = c(10, 60)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+plot(ZMF(pattern = seq(0, 100, by = 1), parameters = c(0.5, 80)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+}

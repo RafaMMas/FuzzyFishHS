@@ -17,3 +17,11 @@ membership of the evaluated values
 \description{
 Product of two sigmoidal membership functions
 }
+\examples{
+plot(PSIGMF(pattern = seq(0, 100, by = 1), parameters = c(2, 15, -0.5, 60)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+plot(PSIGMF(pattern = seq(0, 100, by = 1), parameters = c(1, 50, -0.5, 75)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+}

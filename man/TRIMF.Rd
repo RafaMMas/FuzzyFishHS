@@ -17,3 +17,11 @@ membership of the evaluated values
 \description{
 Triangular membership function
 }
+\examples{
+plot(TRIMF(pattern = seq(0, 100, by = 1), parameters = c(10, 60, 75)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+plot(TRIMF(pattern = seq(0, 100, by = 1), parameters = c(10, 40, 70)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+}

@@ -17,3 +17,11 @@ membership of the evaluated values
 \description{
 Sigmoidal membership functions
 }
+\examples{
+plot(SIGMF(pattern = seq(0, 100, by = 1), parameters = c(0.5,50)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+plot(SIGMF(pattern = seq(0, 100, by = 1), parameters = c(-0.2, 35)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+}

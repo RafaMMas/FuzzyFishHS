@@ -7,6 +7,13 @@
 #' @export
 #'
 #' @examples
+#' Predict <- PREDICT.FRBS.Fast(Data =
+#' Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
+#' FRBS = Lepomis.gibbosus.FRBS)
+#' plot(Lepomis.gibbosus.dataset$Species, Predict[2,],
+#' bty = "n", las = 1, col = "orangered", xlab = "Observed", ylab = "Predicted")
+#' abline(lm(Predict[2,] ~ Lepomis.gibbosus.dataset$Species), col = "dodgerblue")
+#'
 PREDICT.FRBS.Fast <- function(Data, FRBS) {
   Data <- sapply(colnames(FRBS$Range), function(i) {
     Data[Data[, i] > FRBS$Range[2, i], i] <- FRBS$Range[2, i]
@@ -29,13 +36,18 @@ PREDICT.FRBS.Fast <- function(Data, FRBS) {
 
 #' Function to obtain the membership of each datum to each fuzzy rule
 #'
-#' @param Data the the dataset in data.frame format
-#' @param FRBS the list compiling the elements describing a zero-order Takagi–Sugeno–Kang fuzzy rule-based system
+#' @param Data the the dataset in data.frame format.
+#' @param FRBS the list compiling the elements describing a zero-order Takagi–Sugeno–Kang fuzzy rule-based system.
 #'
-#' @return matrix with the membership of each datum to each fuzzy rule
+#' @return matrix with the membership of each datum to each fuzzy rule. Rows are fuzzy rules and columns each datum in the dataset.
 #' @export
 #'
 #' @examples
+#' Memberships <- FUZZIFY.FRBS.Fast(Data =
+#' Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
+#' FRBS = Lepomis.gibbosus.FRBS)
+#' print(Memberships[, 1:12])
+#'
 FUZZIFY.FRBS.Fast <- function(Data, FRBS) {
   apply(Data, 1, function(x) {
     ExpandList <- NULL

@@ -17,3 +17,12 @@ membership of the evaluated values
 \description{
 Gaussian bell membership function
 }
+\examples{
+#'
+plot(GBELLMF(pattern = seq(0, 100, by = 1), parameters = c(10, 1, 50)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+plot(GBELLMF(pattern = seq(0, 100, by = 1), parameters = c(20, 5, 50)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+}

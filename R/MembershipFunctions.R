@@ -8,6 +8,12 @@
 #' @export
 #'
 #' @examples
+#' plot(GAUSSMF(pattern = seq(0, 100, by = 1), parameters = c(35, 5)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(GAUSSMF(pattern = seq(0, 100, by = 1), parameters = c(60, 25)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 GAUSSMF <- function(pattern, parameters) {
   exp(-1 / 2 * (pattern - parameters[1])^2 / parameters[2]^2)
 }
@@ -21,7 +27,13 @@ GAUSSMF <- function(pattern, parameters) {
 #' @importFrom stats approx
 #' @export
 #'
-#' @examples
+#' @examples#'
+#' plot(GBELLMF(pattern = seq(0, 100, by = 1), parameters = c(10, 1, 50)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(GBELLMF(pattern = seq(0, 100, by = 1), parameters = c(20, 5, 50)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 GBELLMF <- function(pattern, parameters) {
   1 / (1 + abs((pattern - parameters[3]) / parameters[1])^(2 * parameters[2]))
 }
@@ -36,6 +48,12 @@ GBELLMF <- function(pattern, parameters) {
 #' @export
 #'
 #' @examples
+#' plot(TRIMF(pattern = seq(0, 100, by = 1), parameters = c(10, 60, 75)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(TRIMF(pattern = seq(0, 100, by = 1), parameters = c(10, 40, 70)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 TRIMF <- function(pattern, parameters) {
   approx(x = parameters, y = c(0, 1, 0), xout = pattern, method = "linear", rule = c(2, 2), ties = max)$y
 }
@@ -50,6 +68,12 @@ TRIMF <- function(pattern, parameters) {
 #' @export
 #'
 #' @examples
+#' plot(TRAPMF(pattern = seq(0, 100, by = 1), parameters = c(10, 60, 75, 90)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(TRAPMF(pattern = seq(0, 100, by = 1), parameters = c(10, 40, 50, 80)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 TRAPMF <- function(pattern, parameters) {
   approx(x = parameters, y = c(0, 1, 1, 0), xout = pattern, method = "linear", rule = c(2, 2), ties = max)$y
 }
@@ -64,6 +88,12 @@ TRAPMF <- function(pattern, parameters) {
 #' @export
 #'
 #' @examples
+#' plot(SIGMF(pattern = seq(0, 100, by = 1), parameters = c(0.5,50)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(SIGMF(pattern = seq(0, 100, by = 1), parameters = c(-0.2, 35)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 SIGMF <- function(pattern, parameters) {
   1 / (1 + exp(-parameters[1] * (pattern - parameters[2])))
 }
@@ -78,6 +108,12 @@ SIGMF <- function(pattern, parameters) {
 #' @export
 #'
 #' @examples
+#' plot(DSIGMF(pattern = seq(0, 100, by = 1), parameters = c(2, 20, 0.5, 60)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(DSIGMF(pattern = seq(0, 100, by = 1), parameters = c(0.5, 20, 0.25, 50)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 DSIGMF <- function(pattern, parameters) {
   abs(1 / (1 + exp(-parameters[1] * (pattern - parameters[2]))) - 1 / (1 + exp(-parameters[3] * (pattern - parameters[4]))))
 }
@@ -92,6 +128,12 @@ DSIGMF <- function(pattern, parameters) {
 #' @export
 #'
 #' @examples
+#' plot(PSIGMF(pattern = seq(0, 100, by = 1), parameters = c(2, 15, -0.5, 60)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(PSIGMF(pattern = seq(0, 100, by = 1), parameters = c(1, 50, -0.5, 75)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 PSIGMF <- function(pattern, parameters) {
   1 / (1 + exp(-parameters[1] * (pattern - parameters[2]))) * 1 / (1 + exp(-parameters[3] * (pattern - parameters[4])))
 }
@@ -106,6 +148,12 @@ PSIGMF <- function(pattern, parameters) {
 #' @export
 #'
 #' @examples
+#' plot(PIMF(pattern = seq(0, 100, by = 1), parameters = c(10, 60, 75, 90)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(PIMF(pattern = seq(0, 100, by = 1), parameters = c(10, 40, 50, 80)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 PIMF <- function(pattern, parameters) {
   Membership <- c()
   for (z in 1:length(pattern))
@@ -153,6 +201,12 @@ PIMF <- function(pattern, parameters) {
 #' @export
 #'
 #' @examples
+#' plot(ZMF(pattern = seq(0, 100, by = 1), parameters = c(10, 60)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(ZMF(pattern = seq(0, 100, by = 1), parameters = c(0.5, 80)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 ZMF <- function(pattern, parameters) {
   Membership <- c()
   for (z in 1:length(pattern))
@@ -187,6 +241,12 @@ ZMF <- function(pattern, parameters) {
 #' @export
 #'
 #' @examples
+#' plot(SMF(pattern = seq(0, 100, by = 1), parameters = c(10, 60)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
+#' plot(SMF(pattern = seq(0, 100, by = 1), parameters = c(0.5, 90)),
+#' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+#'
 SMF <- function(pattern, parameters) {
   Membership <- c()
   for (z in 1:length(pattern))

@@ -7,13 +7,20 @@
 FUZZIFY.FRBS.Fast(Data, FRBS)
 }
 \arguments{
-\item{Data}{the the dataset in data.frame format}
+\item{Data}{the the dataset in data.frame format.}
 
-\item{FRBS}{the list compiling the elements describing a zero-order Takagi–Sugeno–Kang fuzzy rule-based system}
+\item{FRBS}{the list compiling the elements describing a zero-order Takagi–Sugeno–Kang fuzzy rule-based system.}
 }
 \value{
-matrix with the membership of each datum to each fuzzy rule
+matrix with the membership of each datum to each fuzzy rule. Rows are fuzzy rules and columns each datum in the dataset.
 }
 \description{
 Function to obtain the membership of each datum to each fuzzy rule
+}
+\examples{
+Memberships <- FUZZIFY.FRBS.Fast(Data =
+Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
+FRBS = Lepomis.gibbosus.FRBS)
+print(Memberships[, 1:12])
+
 }

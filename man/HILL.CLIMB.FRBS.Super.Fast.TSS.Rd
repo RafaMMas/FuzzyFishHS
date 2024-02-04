@@ -2,20 +2,20 @@
 % Please edit documentation in R/HILL.CLIMB.FRBS.Super.Fast.TSS.R
 \name{HILL.CLIMB.FRBS.Super.Fast.TSS}
 \alias{HILL.CLIMB.FRBS.Super.Fast.TSS}
-\title{Train the fuzzy rule consequents using the hill climbing algorithm}
+\title{Train the fuzzy rule consequents using the hill climbing algorithm.}
 \usage{
 HILL.CLIMB.FRBS.Super.Fast.TSS(Membership, Training.dataset, Trials)
 }
 \arguments{
 \item{Membership}{the matrix with the membership of each datum to each fuzzy rule obtained using the function FUZZIFY.FRBS.Fast.}
 
-\item{Training.dataset}{the training datataset in data.frame format.}
+\item{Training.dataset}{the training datataset in data.frame format. The target species is expected to be named as "Species".}
 
-\item{Trials}{number of repetitions to avoid getting stuck in a local minimum}
+\item{Trials}{number of repetitions to avoid getting stuck in a local minimum.}
 }
 \value{
-list with the best performance (True Skill Statistic, TSS) and the optimal consequents consisting in a vector of ones and zeroes of length the number of fuzzy rules
+list with the best performance (True Skill Statistic, TSS) and the optimal consequents consisting in a vector of ones and zeroes of length the number of fuzzy rules.
 }
 \description{
-Train the fuzzy rule consequents using the hill climbing algorithm
+Train the fuzzy rule consequents using the hill climbing algorithm.
 }

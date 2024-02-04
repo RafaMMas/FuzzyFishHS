@@ -17,3 +17,11 @@ membership of the evaluated values
 \description{
 Gaussian membership function
 }
+\examples{
+plot(GAUSSMF(pattern = seq(0, 100, by = 1), parameters = c(35, 5)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+plot(GAUSSMF(pattern = seq(0, 100, by = 1), parameters = c(60, 25)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+}

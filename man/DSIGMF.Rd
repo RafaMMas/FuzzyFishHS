@@ -17,3 +17,11 @@ membership of the evaluated values
 \description{
 Double sigmoidal membership function
 }
+\examples{
+plot(DSIGMF(pattern = seq(0, 100, by = 1), parameters = c(2, 20, 0.5, 60)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+plot(DSIGMF(pattern = seq(0, 100, by = 1), parameters = c(0.5, 20, 0.25, 50)),
+type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
+
+}

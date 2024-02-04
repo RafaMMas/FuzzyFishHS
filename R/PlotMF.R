@@ -1,9 +1,9 @@
 #' Function to plot the membership functions
 #'
-#' @param FRBS the list compiling the elements describing a zero-order Takagi–Sugeno–Kang fuzzy rule-based system
-#' @param n.pt number of points used to plot each membership function
-#' @param data the training datataset in data.frame format
-#' @param Title the figure title
+#' @param FRBS the list compiling the elements describing a zero-order Takagi–Sugeno–Kang fuzzy rule-based system.
+#' @param n.pt number of points/resolution used to plot each membership function.
+#' @param data the training datataset in *data.frame* format.
+#' @param Title the figure title.
 #'
 #' @return a 4 by 4 plot of the membership functions for each input variable
 #' @importFrom graphics hist par title
@@ -11,6 +11,14 @@
 #' @export
 #'
 #' @examples
+#' PlotMF(FRBS = Lepomis.gibbosus.FRBS, n.pt = 9999,
+#' data = NULL,
+#' Title = "Lepomis gibbosus")
+#'
+#' PlotMF(FRBS = Lepomis.gibbosus.FRBS, n.pt = 9999,
+#' data = Lepomis.gibbosus.dataset,
+#' Title = "Lepomis gibbosus")
+#'
 PlotMF <- function(FRBS, n.pt = 9999, data = NULL, Title = NULL) {
   Nrow <- 1
   Ncol <- 4

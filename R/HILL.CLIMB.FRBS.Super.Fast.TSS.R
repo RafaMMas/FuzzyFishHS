@@ -1,10 +1,10 @@
-#' Train the fuzzy rule consequents using the hill climbing algorithm
+#' Train the fuzzy rule consequents using the hill climbing algorithm.
 #'
 #' @param Membership the matrix with the membership of each datum to each fuzzy rule obtained using the function FUZZIFY.FRBS.Fast.
-#' @param Training.dataset the training datataset in data.frame format.
-#' @param Trials number of repetitions to avoid getting stuck in a local minimum
+#' @param Training.dataset the training datataset in data.frame format. The target species is expected to be named as "Species".
+#' @param Trials number of repetitions to avoid getting stuck in a local minimum.
 #'
-#' @return list with the best performance (True Skill Statistic, TSS) and the optimal consequents consisting in a vector of ones and zeroes of length the number of fuzzy rules
+#' @return list with the best performance (True Skill Statistic, TSS) and the optimal consequents consisting in a vector of ones and zeroes of length the number of fuzzy rules.
 #' @export
 #'
 #' @examples

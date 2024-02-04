@@ -17,3 +17,12 @@ matrix with the membership of each datum to each fuzzy rule obtained using the f
 \description{
 Function to carry out predictions with zero-order Takagi–Sugeno–Kang fuzzy rule-based systems for fish habitat evaluation.
 }
+\examples{
+Predict <- PREDICT.FRBS.Fast(Data =
+Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
+FRBS = Lepomis.gibbosus.FRBS)
+plot(Lepomis.gibbosus.dataset$Species, Predict[2,],
+bty = "n", las = 1, col = "orangered", xlab = "Observed", ylab = "Predicted")
+abline(lm(Predict[2,] ~ Lepomis.gibbosus.dataset$Species), col = "dodgerblue")
+
+}
