@@ -27,7 +27,7 @@ GAUSSMF <- function(pattern, parameters) {
 #' @importFrom stats approx
 #' @export
 #'
-#' @examples#'
+#' @examples
 #' plot(GBELLMF(pattern = seq(0, 100, by = 1), parameters = c(10, 1, 50)),
 #' type = "l", xlab = "Value", ylab = "Membership", bty = "n", las = 1, col = "orangered")
 #'

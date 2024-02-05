@@ -8,6 +8,14 @@
 #' @export
 #'
 #' @examples
+#' Memberships <- FUZZIFY.FRBS.Fast(Data =
+#' Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
+#' FRBS = Lepomis.gibbosus.FRBS)
+#' #'
+#' Optimised.consequents <- HILL.CLIMB.FRBS.Super.Fast.TSS(Membership = Memberships,
+#'                                                         Training.dataset = Lepomis.gibbosus.dataset,
+#'                                                         Trials = 9)
+#'
 HILL.CLIMB.FRBS.Super.Fast.TSS <- function(Membership, Training.dataset, Trials) {
   Optimal.Consequents.Matrix <- NULL
   TSSs <- NULL
@@ -20,7 +28,6 @@ HILL.CLIMB.FRBS.Super.Fast.TSS <- function(Membership, Training.dataset, Trials)
     Output.value <- apply(Membership, 2, function(x) {
       sum(c(x) * c(Temporal.Consequents)) / sum(x)
     })
-
 
     TSS <- sum(caret::confusionMatrix(data = cut(Output.value, breaks = c(0, 0.5, 1), labels = c(0, 1), include.lowest = T), reference = factor(Training.dataset[, "Species"], levels = c("0", "1")), positive = "1")$byClass[1:2]) - 1
 

@@ -19,3 +19,13 @@ list with the best performance (True Skill Statistic, TSS) and the optimal conse
 \description{
 Train the fuzzy rule consequents using the hill climbing algorithm.
 }
+\examples{
+Memberships <- FUZZIFY.FRBS.Fast(Data =
+Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
+FRBS = Lepomis.gibbosus.FRBS)
+#'
+Optimised.consequents <- HILL.CLIMB.FRBS.Super.Fast.TSS(Membership = Memberships,
+                                                        Training.dataset = Lepomis.gibbosus.dataset,
+                                                        Trials = 9)
+
+}
