@@ -16,6 +16,7 @@
 #'                                                         Training.dataset = Lepomis.gibbosus.dataset,
 #'                                                         Trials = 9)
 #'
+#'
 HILL.CLIMB.FRBS.Super.Fast.TSS <- function(Membership, Training.dataset, Trials) {
   Optimal.Consequents.Matrix <- NULL
   TSSs <- NULL
