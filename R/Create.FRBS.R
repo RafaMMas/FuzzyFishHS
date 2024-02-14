@@ -47,7 +47,7 @@
 #'                       )
 #'
 Create.FRBS.R <- function(ImpVariables, Range, MFfunction, MFparameters, Consequents) {
-  list(ImpVariables, Range, MFfunction, MFparameters, Consequents)
+  list(ImpVariables = ImpVariables, Range = Range, MFfunction = MFfunction, MFparameters = MFparameters, Consequents = Consequents)
 }
 
 #' Lepomis gibbosus dataset continaing four microhabitat variables: Velocity, Depth, Substrate and Cover and its presence (1) and absneec (0).

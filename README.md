@@ -6,7 +6,9 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of FuzzyFishHS is to …
+FuzzyFishHS provides functions to develop and inspect zero-order
+presence-absence Takagi–Sugeno–Kang fuzzy rule-based systems for fish
+habitat evaluation within environmental flow assessemnt studies.
 
 ## Installation
 
@@ -20,33 +22,122 @@ devtools::install_github("RafaMMas/FuzzyFishHS")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+### Model development
 
 ``` r
 library(FuzzyFishHS)
-## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+Create the Fuzzy Rule-Based System (FRBS) using the function FRBS. This
+function simply lists the following five arguments:
+
+- *ImpVariables* the names of the input variables in vector format
+- *Range* a matrix with as many columns as input variables with the
+  minimum and maximum expected values for each variable
+- *MFfunction* the selected membership function
+- *MFparameters* the parameters of the membership functions. It should
+  be a matrix with as many columns as fuzzy sets. The columns for each
+  variable must include the variable name as indicated in
+  *ImpVariables*.
+- *Consequents* the zero-order TSK fuzzy rule consequents.
+
+You can choose among the 10 different membership functions implemented
+in the packages. The package includes a function
+(*HILL.CLIMB.FRBS.Super.Fast.TSS*) to train (optimise) the fuzzy rules’
+consequents. At this point you can add a random vector with as many
+consequents as fuzzy rules. <br>
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+FRBS <- Create.FRBS.R(ImpVariables = c("Velocity", "Depth", "Substrate.index", "Cover.index"),
+                       Range = matrix(c(0, 1.164, 0, 2.67, 0, 8, 0, 1), nrow = 2, byrow = FALSE,
+                                      dimnames = list(NULL, c("Velocity", "Depth", "Substrate.index", "Cover.index"))),
+                       MFfunction = PIMF,
+                       MFparameters = matrix(c(0, 0, 0.0377, 0.4,
+                                               0.0377, 0.4, 1.164, 1.164,
+                                               0, 0, 0.46, 0.8767,
+                                               0.46, 0.8767, 1.3067, 2.67,
+                                               1.3067, 2.67, 2.67, 2.67,
+                                               0, 0, 0, 0.5333,
+                                               0, 0.5333, 3.8667, 6,
+                                               3.8667, 6, 8, 8,
+                                               0, 0, 0, 1,
+                                               0, 1, 1, 1), nrow = 4, byrow = FALSE,
+                                      dimnames = list(NULL, c("VelocityL", "VelocityH",
+                                             "DepthL", "DepthM", "DepthH",
+                                             "Substrate.indexL", "Substrate.indexM",
+                                             "Substrate.indexH",
+                                             "Cover.indexL", "Cover.indexH"))),
+                       Consequents = c(0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0.5, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0)
+                       )
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+<br> Once the *FRBS* has been created it is recommended to plot the
+membership functions and check whether they are correct. <br>
 
-You can also embed plots, for example:
+``` r
+  PlotMF(FRBS = Lepomis.gibbosus.FRBS, n.pt = 9999,
+         data = NULL,
+         Title = "Lepomis gibbosus")
+```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+<img src="man/figures/README-plot membership functions-1.png" width="100%" />
+<br> <br> The function *PlotMF* allows including the training dataset to
+compare the membership functions whit the distribution of the input
+variables per output class (*i.e.,* presence or absence). Pink
+corresponds to presence data and grey to absence. <br>
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+``` r
+  PlotMF(FRBS = Lepomis.gibbosus.FRBS, n.pt = 9999,
+         data = Lepomis.gibbosus.dataset,
+         Title = "Lepomis gibbosus")
+```
+
+<img src="man/figures/README-plot membership functions and data-1.png" width="100%" />
+
+### Fuzzy rules training
+
+In order to boost rules’ training the membership of each datum to each
+fuzzy rule is calculated beforehand. It can be done employing the
+function *FUZZIFY.FRBS.Fast*. <br>
+
+``` r
+Memberships <- FUZZIFY.FRBS.Fast(Data =
+                                 Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
+                                 FRBS = Lepomis.gibbosus.FRBS)
+```
+
+<br> Once the membership is calculated it it fed to the function
+*HILL.CLIMB.FRBS.Super.Fast.TSS*. The hill climbing algorithm starts
+from a random set of consequents and modifies one consequance at a time
+retaining those changes tha improve model performance (*i.e.,* the True
+Skill Statistic). Threfore, we recommend repeating the optimisation
+multiple times to avoid getting traped in local minima. <br>
+
+``` r
+Optimised.consequents <- HILL.CLIMB.FRBS.Super.Fast.TSS(Membership = Memberships,
+                                                        Training.dataset = Lepomis.gibbosus.dataset,
+                                                        Trials = 9)
+print(Optimised.consequents)
+#> $TSS
+#> [1] 0.6671805
+#> 
+#> $Consequents
+#>  [1] 0 0 0 1 0 1 0 0 1 0 0 1 0 0 0 0 0 0 1 0 1 0 1 1 0 0 1 1 0 0 1 0 0 0 0 0
+```
+
+<br>
+
+After the hill climbing algorithm finished, the random consequents can
+be substitutted by those optimal and predictions can be done as follow:
+
+``` r
+
+Predict <- PREDICT.FRBS.Fast(Data = Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
+                             FRBS = Lepomis.gibbosus.FRBS)
+
+plot(Lepomis.gibbosus.dataset$Species, Predict[2,],
+                              bty = "n", las = 1, col = "orangered", xlab = "Observed", ylab = "Predicted")
+abline(lm(Predict[2,] ~ Lepomis.gibbosus.dataset$Species), col = "dodgerblue")
+```
+
+<img src="man/figures/README-prediction-1.png" width="100%" /> <br>
