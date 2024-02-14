@@ -1,19 +1,28 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # FuzzyFishHS
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-FuzzyFishHS provides functions to develop and inspect zero-order
-presence-absence Takagi–Sugeno–Kang fuzzy rule-based systems for fish
-habitat evaluation within environmental flow assessemnt studies.
+FuzzyFishHS provides functions to develop and inspect zero-order presence-absence Takagi–Sugeno–Kang fuzzy rule-based systems for fish habitat evaluation within environmental flow assessemnt studies. 
 
 ## Installation
 
-You can install the development version of FuzzyFishHS from
-[GitHub](https://github.com/) with:
+You can install the development version of FuzzyFishHS from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -24,30 +33,21 @@ devtools::install_github("RafaMMas/FuzzyFishHS")
 
 ### Model development
 
-``` r
+```{r example}
 library(FuzzyFishHS)
 ```
 
-Create the Fuzzy Rule-Based System (FRBS) using the function FRBS. This
-function simply lists the following five arguments:
+Create the Fuzzy Rule-Based System (FRBS) using the function FRBS. This function simply lists the following five arguments:
 
 - *ImpVariables* the names of the input variables in vector format
-- *Range* a matrix with as many columns as input variables with the
-  minimum and maximum expected values for each variable
+- *Range* a matrix with as many columns as input variables with the minimum and maximum expected values for each variable
 - *MFfunction* the selected membership function
-- *MFparameters* the parameters of the membership functions. It should
-  be a matrix with as many columns as fuzzy sets. The columns for each
-  variable must include the variable name as indicated in
-  *ImpVariables*.
+- *MFparameters* the parameters of the membership functions. It should be a matrix with as many columns as fuzzy sets. The columns for each variable must include the variable name as indicated in *ImpVariables*.
 - *Consequents* the zero-order TSK fuzzy rule consequents.
 
-You can choose among the 10 different membership functions implemented
-in the packages. The package includes a function
-(*HILL.CLIMB.FRBS.Super.Fast.TSS*) to train (optimise) the fuzzy rules’
-consequents. At this point you can add a random vector with as many
-consequents as fuzzy rules. <br>
-
-``` r
+You can choose among the 10 different membership functions implemented in the packages. The package includes a function (*HILL.CLIMB.FRBS.Super.Fast.TSS*) to train (optimise) the fuzzy rules' consequents. At this point you can add a random vector with as many consequents as fuzzy rules. 
+<br>
+```{r create FRBS, echo = TRUE}
 Example.FRBS <- Create.FRBS.R(ImpVariables = c("Velocity", "Depth", "Substrate.index", "Cover.index"),
                        Range = matrix(c(0, 1.164, 0, 2.67, 0, 8, 0, 1), ncol = 4, dimnames = list(NULL, c("Velocity", "Depth", "Substrate.index", "Cover.index")
                                                                                                   )),
@@ -62,66 +62,47 @@ Example.FRBS <- Create.FRBS.R(ImpVariables = c("Velocity", "Depth", "Substrate.i
                        Consequents = c(0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0.5, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0)
                        )
 ```
-
-<br> Once the *FRBS* has been created it is recommended to plot the
-membership functions and check whether they are correct. <br>
-
-``` r
+<br>
+Once the *FRBS* has been created it is recommended to plot the membership functions and check whether they are correct.
+<br>
+```{r plot membership functions, fig.dim=c(10, 4), dpi=600, echo = TRUE}
 PlotMF(FRBS = Example.FRBS, n.pt = 9999,
        data = NULL,
        Title = "Lepomis gibbosus")
 ```
-
-<img src="man/figures/README-plot membership functions-1.png" width="100%" />
-<br> <br> The function *PlotMF* allows including the training dataset to
-compare the membership functions whit the distribution of the input
-variables per output class (*i.e.,* presence or absence). Pink
-corresponds to presence data and grey to absence. <br>
-
-``` r
+<br>
+<br>
+The function *PlotMF* allows including the training dataset to compare the membership functions whit the distribution of the input variables per output class (*i.e.,* presence or absence). Pink corresponds to presence data and grey to absence.
+<br>
+```{r plot membership functions and data, fig.dim=c(10, 4), dpi=600, echo = TRUE}
 PlotMF(FRBS = Example.FRBS, n.pt = 9999,
       data = Lepomis.gibbosus.dataset,
       Title = "Lepomis gibbosus")
 ```
 
-<img src="man/figures/README-plot membership functions and data-1.png" width="100%" />
-
 ### Fuzzy rules training
 
-In order to boost rules’ training the membership of each datum to each
-fuzzy rule is calculated beforehand. It can be done employing the
-function *FUZZIFY.FRBS.Fast*. <br>
-
-``` r
+In order to boost rules' training the membership of each datum to each fuzzy rule is calculated beforehand. It can be done employing the function *FUZZIFY.FRBS.Fast*.
+<br>
+```{r obtain membership, echo = TRUE}
 Memberships <- FUZZIFY.FRBS.Fast(Data = Lepomis.gibbosus.dataset[,Example.FRBS$ImpVariables],
                                  FRBS = Example.FRBS)
 ```
-
-<br> Once the membership is calculated it it fed to the function
-*HILL.CLIMB.FRBS.Super.Fast.TSS*. The hill climbing algorithm starts
-from a random set of consequents and modifies one consequance at a time
-retaining those changes tha improve model performance (*i.e.,* the True
-Skill Statistic). Threfore, we recommend repeating the optimisation
-multiple times to avoid getting traped in local minima. <br>
-
-``` r
+<br>
+Once the membership is calculated it it fed to the function *HILL.CLIMB.FRBS.Super.Fast.TSS*. The hill climbing algorithm starts from a random set of consequents and modifies one consequance at a time retaining those changes tha improve model performance (*i.e.,* the True Skill Statistic). Threfore, we recommend repeating the optimisation multiple times to avoid getting traped in local minima.
+<br>
+```{r rules training, echo = TRUE}
 Optimised.consequents <- HILL.CLIMB.FRBS.Super.Fast.TSS(Membership = Memberships,
                                                         Training.dataset = Lepomis.gibbosus.dataset,
                                                         Trials = 9)
 print(Optimised.consequents)
-#> $TSS
-#> [1] 0.6671805
-#> 
-#> $Consequents
-#>  [1] 0 0 0 1 0 1 0 0 1 0 0 1 0 0 0 0 0 0 1 0 1 0 1 1 0 0 1 1 0 0 1 0 0 0 0 0
-```
 
+```
 <br>
 
-After the hill climbing algorithm finished, the random consequents can
-be substitutted by those optimal and predictions can be done as follow:
+After the hill climbing algorithm finished, the random consequents can be substitutted by those optimal and predictions can be done as follow:
 
-``` r
+```{r prediction, fig.dim=c(3, 3.5), dpi=250, echo = TRUE}
 
 Predict <- PREDICT.FRBS.Fast(Data = Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
                              FRBS = Example.FRBS)
@@ -129,6 +110,7 @@ Predict <- PREDICT.FRBS.Fast(Data = Lepomis.gibbosus.dataset[,Lepomis.gibbosus.F
 plot(Lepomis.gibbosus.dataset$Species, Predict[2,],
                               bty = "n", las = 1, col = "orangered", xlab = "Observed", ylab = "Predicted")
 abline(lm(Predict[2,] ~ Lepomis.gibbosus.dataset$Species), col = "dodgerblue")
-```
 
-<img src="man/figures/README-prediction-1.png" width="100%" /> <br>
+```
+<br>
+
