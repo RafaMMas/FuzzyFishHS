@@ -102,12 +102,6 @@ print(Optimised.consequents)
 
 After the hill climbing algorithm finished, the random consequents can be substitutted by those optimal and predictions can be done as follow:
 
-```{r par 1, echo = FALSE}
-
-op <- par(oma = c(0.5, 0.5, 0.5, 0.5), mar=c(5, 5.5, 0.5, 0.5), cex.axis = 1.5, cex.lab = 2, mgp = c(2, 1, 0))
-
-```
-
 ```{r prediction, out.height="50%", fig.align = 'center', out.width="40%", dpi=300, echo = TRUE}
 
 Predict <- PREDICT.FRBS.Fast(Data = Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
@@ -118,14 +112,6 @@ op <- par(oma = c(0.5, 0.5, 0.5, 0.5), mar=c(5, 6, 0.5, 0.5), cex.axis = 1.5, ce
 plot(Lepomis.gibbosus.dataset$Species, Predict[2,],
                               bty = "n", las = 1, col = "orangered", xlab = "Observed", ylab = "Predicted")
 abline(lm(Predict[2,] ~ Lepomis.gibbosus.dataset$Species), col = "dodgerblue")
-
-par(op)
-
-```
-
-```{r par 2, echo = FALSE}
-
-par(op)
 
 ```
 

@@ -135,9 +135,4 @@ abline(lm(Predict[2,] ~ Lepomis.gibbosus.dataset$Species), col = "dodgerblue")
 
 <img src="man/figures/README-prediction-1.png" width="40%" height="50%" style="display: block; margin: auto;" />
 
-``` r
-
-par(op)
-```
-
 <br>
