@@ -74,7 +74,7 @@ PlotMF(FRBS = Example.FRBS, n.pt = 9999,
 
 <img src="man/figures/README-plot membership functions-1.png" width="100%" />
 <br> <br> The function *PlotMF* allows including the training dataset to
-compare the membership functions whit the distribution of the input
+compare the membership functions with the distribution of the input
 variables per output class (*i.e.,* presence or absence). Pink
 corresponds to presence data and grey to absence. <br>
 
@@ -126,9 +126,18 @@ be substitutted by those optimal and predictions can be done as follow:
 Predict <- PREDICT.FRBS.Fast(Data = Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
                              FRBS = Example.FRBS)
 
+op <- par(oma = c(0.5, 0.5, 0.5, 0.5), mar=c(5, 6, 0.5, 0.5), cex.axis = 1.5, cex.lab = 2, mgp = c(3.5, 1, 0))
+
 plot(Lepomis.gibbosus.dataset$Species, Predict[2,],
                               bty = "n", las = 1, col = "orangered", xlab = "Observed", ylab = "Predicted")
 abline(lm(Predict[2,] ~ Lepomis.gibbosus.dataset$Species), col = "dodgerblue")
 ```
 
-<img src="man/figures/README-prediction-1.png" width="100%" /> <br>
+<img src="man/figures/README-prediction-1.png" width="40%" height="50%" style="display: block; margin: auto;" />
+
+``` r
+
+par(op)
+```
+
+<br>
