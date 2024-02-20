@@ -126,8 +126,6 @@ be substitutted by those optimal and predictions can be done as follow:
 Predict <- PREDICT.FRBS.Fast(Data = Lepomis.gibbosus.dataset[,Lepomis.gibbosus.FRBS$ImpVariables],
                              FRBS = Example.FRBS)
 
-op <- par(oma = c(0.5, 0.5, 0.5, 0.5), mar=c(5, 6, 0.5, 0.5), cex.axis = 1.5, cex.lab = 2, mgp = c(3.5, 1, 0))
-
 plot(Lepomis.gibbosus.dataset$Species, Predict[2,],
                               bty = "n", las = 1, col = "orangered", xlab = "Observed", ylab = "Predicted")
 abline(lm(Predict[2,] ~ Lepomis.gibbosus.dataset$Species), col = "dodgerblue")
