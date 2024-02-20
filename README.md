@@ -72,7 +72,7 @@ PlotMF(FRBS = Example.FRBS, n.pt = 9999,
        Title = "Lepomis gibbosus")
 ```
 
-<img src="man/figures/README-plot membership functions-1.png" width="100%" />
+<img src="man/figures/README-plot membership functions-1.png" width="100%" height="70%" />
 <br> <br> The function *PlotMF* allows including the training dataset to
 compare the membership functions with the distribution of the input
 variables per output class (*i.e.,* presence or absence). Pink
@@ -84,7 +84,7 @@ PlotMF(FRBS = Example.FRBS, n.pt = 9999,
       Title = "Lepomis gibbosus")
 ```
 
-<img src="man/figures/README-plot membership functions and data-1.png" width="100%" />
+<img src="man/figures/README-plot membership functions and data-1.png" width="100%" height="70%" />
 
 ### Fuzzy rules training
 
@@ -131,6 +131,10 @@ plot(Lepomis.gibbosus.dataset$Species, Predict[2,],
 abline(lm(Predict[2,] ~ Lepomis.gibbosus.dataset$Species), col = "dodgerblue")
 ```
 
-<img src="man/figures/README-prediction-1.png" width="40%" height="50%" style="display: block; margin: auto;" />
+<center>
+
+<img src="man/figures/README-prediction-1.png" width="50%" style="display: block; margin: auto;" />
+
+</center>
 
 <br>
